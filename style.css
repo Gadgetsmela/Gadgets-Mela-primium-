@@ -1,0 +1,33 @@
+/*
+Theme Name: Gadgets Mela Premium
+Theme URI: https://example.com/gadgets-mela-premium
+Author: Gadgets Mela Team
+Author URI: https://example.com
+Description: A modern WordPress storefront theme for electronics and gadgets.
+Version: 2.0.0
+Requires at least: 6.4
+Tested up to: 6.6
+Requires PHP: 8.0
+Text Domain: gadgets-mela-premium
+*/
+
+/*
+ * Minimal base styles so the theme remains legible
+ * even if assets/css/main.css fails to load.
+ */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #121212;
+  background: #f7f8fb;
+  line-height: 1.6;
+}
+
+a {
+  color: #005bd4;
+}
