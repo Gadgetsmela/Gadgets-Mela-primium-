@@ -1,19 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { seoPages, AFFILIATE_TAG } from '../src/seo-pages.js';
+import {
+  AFFILIATE_TAG,
+  buildFaqSchema,
+  buildProductSchema,
+  getRelatedProducts,
+  seoPages
+} from '../src/seo-pages.js';
 
-test('all requested SEO landing pages are configured', () => {
+test('all requested SEO article pages are configured', () => {
   assert.deepEqual(
     seoPages.map((page) => page.heading),
     [
       'Best Gadgets Under ₹499',
       'Best Gadgets Under ₹999',
-      'Best Earbuds Under ₹999',
-      'Best Smart Home Gadgets',
-      'Best Mobile Accessories',
+      'Amazon Finds India',
       'Best Kitchen Gadgets',
-      'Trending Amazon Finds India'
+      'Trending Tech Products',
+      'Best Mobile Accessories',
+      'Gaming Setup Products'
     ]
   );
 });
@@ -25,6 +31,7 @@ test('landing page data includes product cards, affiliate URLs, FAQs, and intern
     assert.ok(page.metaDescription.length > 80);
     assert.equal(page.faqs.length, 3);
     assert.equal(page.products.length >= 4, true);
+    assert.equal(getRelatedProducts(page).length, 4);
 
     for (const product of page.products) {
       const url = new URL(product.affiliateUrl);
@@ -36,15 +43,34 @@ test('landing page data includes product cards, affiliate URLs, FAQs, and intern
   }
 });
 
-test('generated HTML files expose SEO metadata and FAQ schema', () => {
+test('schema builders expose FAQ and Product structured data', () => {
+  for (const page of seoPages) {
+    const faqSchema = buildFaqSchema(page);
+    const productSchema = buildProductSchema(page);
+
+    assert.equal(faqSchema['@type'], 'FAQPage');
+    assert.equal(faqSchema.mainEntity.length, 3);
+    assert.equal(productSchema['@type'], 'ItemList');
+    assert.equal(productSchema.itemListElement.length, page.products.length);
+    assert.equal(productSchema.itemListElement[0].item['@type'], 'Product');
+    assert.equal(productSchema.itemListElement[0].item.offers.priceCurrency, 'INR');
+  }
+});
+
+test('generated HTML files expose SEO metadata, schemas, related products, and fast mobile hooks', () => {
   for (const page of seoPages) {
     const html = readFileSync(page.path, 'utf8');
     assert.match(html, new RegExp(`<title>${escapeRegExp(page.metaTitle)}</title>`));
     assert.match(html, /<meta name="description"/);
+    assert.match(html, /max-image-preview:large/);
     assert.match(html, /application\/ld\+json/);
     assert.match(html, /FAQPage/);
+    assert.match(html, /Product/);
+    assert.match(html, /Article/);
     assert.match(html, /data-product-grid/);
+    assert.match(html, /data-related-products/);
     assert.match(html, /data-related-links/);
+    assert.match(html, /decoding="async"/);
     assert.match(html, /google-site-verification/);
     assert.match(html, /Click Tracking Dashboard/);
   }

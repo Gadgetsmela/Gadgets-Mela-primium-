@@ -19,7 +19,7 @@ test('click summary groups events by label and page', () => {
   const events = [
     { label: 'Cable Organizer Clips', pagePath: 'best-gadgets-under-499.html', clickedAt: '2026-05-09T10:00:00.000Z' },
     { label: 'Cable Organizer Clips', pagePath: 'best-gadgets-under-499.html', clickedAt: '2026-05-09T10:01:00.000Z' },
-    { label: 'Smart Plug', pagePath: 'best-smart-home-gadgets.html', clickedAt: '2026-05-09T10:02:00.000Z' }
+    { label: 'RGB Mouse Pad', pagePath: 'gaming-setup-products.html', clickedAt: '2026-05-09T10:02:00.000Z' }
   ];
 
   const summary = getClickSummary(events);
@@ -27,7 +27,7 @@ test('click summary groups events by label and page', () => {
   assert.equal(summary.totalClicks, 3);
   assert.equal(summary.uniquePages, 2);
   assert.equal(summary.byLabel['Cable Organizer Clips'], 2);
-  assert.equal(summary.byPage['best-smart-home-gadgets.html'], 1);
+  assert.equal(summary.byPage['gaming-setup-products.html'], 1);
 });
 
 test('click tracking is safe during server-side tests', () => {
