@@ -1,28 +1,26 @@
 import { initGoogleAnalytics, registerClickTracking } from './analytics.js';
-import { SITE_NAME, getPageBySlug, seoPages } from './seo-pages.js';
-
-const pageSlug = document.body.dataset.page;
-const currentPage = pageSlug ? getPageBySlug(pageSlug) : null;
-const formatLinks = (page) => page.path;
-const dashboardLink = '<a href="click-dashboard.html">Click Tracking Dashboard</a>';
+import { SITE_NAME, getPageBySlug, getRelatedPages, getRelatedProducts, seoPages } from './seo-pages.js';
 
 initGoogleAnalytics();
-registerClickTracking();
+
+const currentSlug = document.body.dataset.page;
 
 renderNavigation();
+renderDirectory();
 
-if (currentPage) {
-  renderLandingPage(currentPage);
-} else {
-  renderDirectory();
+if (currentSlug) {
+  renderLandingPage(getPageBySlug(currentSlug));
 }
+
+registerClickTracking();
 
 function renderNavigation() {
   const nav = document.querySelector('[data-page-links]');
   if (!nav) return;
 
+  const dashboardLink = `<a href="click-dashboard.html"${currentSlug === 'click-dashboard' ? ' aria-current="page"' : ''}>Click Tracking Dashboard</a>`;
   nav.innerHTML = seoPages
-    .map((page) => `<a href="${formatLinks(page)}"${page.slug === pageSlug ? ' aria-current="page"' : ''}>${page.heading}</a>`)
+    .map((page) => `<a href="${page.path}"${page.slug === currentSlug ? ' aria-current="page"' : ''}>${page.heading}</a>`)
     .concat(dashboardLink)
     .join('');
 }
@@ -40,11 +38,14 @@ function renderLandingPage(page) {
     .map((faq) => `<details><summary>${faq.question}</summary><p>${faq.answer}</p></details>`)
     .join('');
 
-  document.querySelector('[data-related-links]').innerHTML = seoPages
-    .filter((related) => related.slug !== page.slug)
-    .slice(0, 6)
+  document.querySelector('[data-related-links]').innerHTML = getRelatedPages(page)
     .map((related) => `<a href="${related.path}">${related.heading}</a>`)
     .join('');
+
+  const relatedProducts = document.querySelector('[data-related-products]');
+  if (relatedProducts) {
+    relatedProducts.innerHTML = getRelatedProducts(page).map(renderRelatedProduct).join('');
+  }
 }
 
 function renderDirectory() {
@@ -75,7 +76,7 @@ function renderProductCard(product) {
   return `
     <article class="product-card">
       <div class="image-frame">
-        <img src="${product.imageUrl}" alt="${product.title}" loading="lazy" />
+        <img src="${product.imageUrl}" alt="${product.title}" loading="lazy" decoding="async" />
       </div>
       <div class="card-body">
         <span class="status">${product.badge}</span>
@@ -86,6 +87,20 @@ function renderProductCard(product) {
         <div class="actions">
           <a class="button-link primary" href="${product.affiliateUrl}" target="_blank" rel="nofollow sponsored noopener" data-track-click="true" data-track-category="amazon-affiliate" data-track-label="${product.title}">View on Amazon</a>
         </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderRelatedProduct(product) {
+  return `
+    <article class="related-product-card">
+      <img src="${product.imageUrl}" alt="${product.title}" loading="lazy" decoding="async" />
+      <div>
+        <p class="eyebrow">${product.sourceHeading}</p>
+        <h3>${product.title}</h3>
+        <p>${product.description}</p>
+        <a href="${product.sourcePath}">Read related guide</a>
       </div>
     </article>
   `;
