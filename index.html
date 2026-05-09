@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GADGETS MELA Product Import</title>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">GADGETS MELA</p>
+        <h1>Fallback product import</h1>
+        <p>Import ASINs safely when PA API is unavailable, then complete details before publishing.</p>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <h2>Import single ASIN</h2>
+        <form id="asin-import-form" class="stack">
+          <label>
+            Amazon ASIN
+            <input id="asin-input" name="asin" placeholder="B0FFBMBPF3" required />
+          </label>
+          <button type="submit">Create draft product</button>
+        </form>
+        <p class="notice">PA API unavailable. Please add title, image, and price manually before publishing.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Bulk manual import</h2>
+        <p class="format">Use one product per line:</p>
+        <code>title | asin | amazonUrl | imageUrl | priceINR | mrpINR | category | badge</code>
+        <form id="bulk-import-form" class="stack">
+          <textarea id="bulk-input" rows="6" placeholder="Wireless Earbuds | B0EXAMPLE12 | https://www.amazon.in/dp/B0EXAMPLE12 | https://m.media-amazon.com/images/I/example.jpg | 1299 | 2999 | Audio | Deal"></textarea>
+          <button type="submit">Import draft products</button>
+        </form>
+      </section>
+
+      <section class="panel wide">
+        <div class="section-heading">
+          <div>
+            <h2>Draft products</h2>
+            <p>Drafts remain hidden from the storefront until every required field is complete.</p>
+          </div>
+        </div>
+        <div id="draft-list" class="card-grid"></div>
+      </section>
+
+      <section class="panel wide">
+        <h2>Storefront preview</h2>
+        <p>Only published products with a non-zero rupee price are shown here.</p>
+        <div id="storefront-list" class="card-grid"></div>
+      </section>
+    </main>
+
+    <template id="product-card-template">
+      <article class="product-card">
+        <div class="image-frame">
+          <img data-field="image" alt="" />
+          <span data-field="imagePlaceholder">No image yet</span>
+        </div>
+        <div class="card-body">
+          <span class="status" data-field="status"></span>
+          <h3 data-field="title"></h3>
+          <p data-field="asin"></p>
+          <p class="muted" data-field="message"></p>
+          <p class="price" data-field="price"></p>
+          <p class="muted" data-field="missing"></p>
+          <div class="actions">
+            <button type="button" data-action="edit">Edit product</button>
+            <button type="button" data-action="publish" class="primary">Publish</button>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <dialog id="edit-dialog">
+      <form id="edit-product-form" method="dialog" class="editor-form">
+        <header>
+          <h2>Edit product</h2>
+          <button type="button" id="close-editor" aria-label="Close editor">×</button>
+        </header>
+        <input type="hidden" id="edit-id" />
+        <div class="form-grid">
+          <label>Product title<input id="edit-title" required /></label>
+          <label>Amazon product URL<input id="edit-amazon-url" type="url" required /></label>
+          <label>Amazon image URL<input id="edit-image-url" type="url" /></label>
+          <label>Upload image<input id="edit-image-upload" type="file" accept="image/*" /></label>
+          <label>India price ₹<input id="edit-price" type="number" min="1" step="0.01" required /></label>
+          <label>India MRP ₹<input id="edit-mrp" type="number" min="1" step="0.01" required /></label>
+          <label>Category<input id="edit-category" required /></label>
+          <label>Badge<input id="edit-badge" /></label>
+          <label class="full">Short description<textarea id="edit-description" rows="3" required></textarea></label>
+        </div>
+        <div class="preview-row">
+          <div class="image-frame small">
+            <img id="image-preview" alt="Product image preview" />
+            <span id="image-preview-placeholder">Image preview</span>
+          </div>
+          <p class="muted">Publish appears on the draft card only after all required details are saved.</p>
+        </div>
+        <footer>
+          <button type="button" id="save-editor" class="primary">Save product</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>
