@@ -313,3 +313,99 @@ summary {
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; }
 }
+
+.inline-code {
+  display: inline-block;
+  padding: .15rem .4rem;
+}
+
+.dashboard-heading {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.dashboard-metrics {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.metric-card,
+.metric-row {
+  background: #fffdf9;
+  border: 1px solid #eadfce;
+  border-radius: 1rem;
+}
+
+.metric-card {
+  display: grid;
+  gap: .45rem;
+  padding: 1rem;
+}
+
+.metric-card span,
+.metric-row span {
+  color: #76695f;
+  font-weight: 800;
+}
+
+.metric-card strong {
+  color: #9c4200;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.metric-list {
+  display: grid;
+  gap: .75rem;
+}
+
+.metric-row {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: .85rem 1rem;
+}
+
+.metric-row strong {
+  background: #ffebbd;
+  border-radius: 999px;
+  color: #7b4a00;
+  min-width: 2.5rem;
+  padding: .35rem .65rem;
+  text-align: center;
+}
+
+.table-wrap { overflow-x: auto; }
+
+.click-table {
+  border-collapse: collapse;
+  min-width: 720px;
+  width: 100%;
+}
+
+.click-table th,
+.click-table td {
+  border-bottom: 1px solid #eadfce;
+  padding: .85rem;
+  text-align: left;
+}
+
+.click-table th {
+  background: #fff8df;
+  color: #6f4900;
+  font-size: .85rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.click-table a {
+  color: #9c4200;
+  font-weight: 800;
+}
+
+@media (max-width: 760px) {
+  .dashboard-heading { align-items: stretch; flex-direction: column; }
+  .dashboard-metrics { grid-template-columns: 1fr; }
+}

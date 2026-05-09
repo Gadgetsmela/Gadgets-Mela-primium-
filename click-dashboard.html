@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-site-verification" content="replace-with-your-google-search-console-token" />
+    <title>Click Tracking Dashboard | GADGETS MELA</title>
+    <meta name="description" content="Monitor GADGETS MELA Amazon affiliate click activity, GA4 setup status, and Google Search Console verification notes from a local browser dashboard." />
+    <link rel="canonical" href="click-dashboard.html" />
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="site-header landing-hero">
+      <nav class="top-nav" aria-label="SEO landing pages" data-page-links><a href="best-gadgets-under-499.html">Best Gadgets Under ₹499</a><a href="best-gadgets-under-999.html">Best Gadgets Under ₹999</a><a href="best-earbuds-under-999.html">Best Earbuds Under ₹999</a><a href="best-smart-home-gadgets.html">Best Smart Home Gadgets</a><a href="best-mobile-accessories.html">Best Mobile Accessories</a><a href="best-kitchen-gadgets.html">Best Kitchen Gadgets</a><a href="trending-amazon-finds-india.html">Trending Amazon Finds India</a><a href="click-dashboard.html" aria-current="page">Click Tracking Dashboard</a></nav>
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Analytics</p>
+          <h1>Click tracking dashboard</h1>
+          <p>Use this browser-based dashboard to verify Amazon affiliate button clicks before connecting live reporting in Google Analytics and Search Console.</p>
+        </div>
+        <aside class="hero-card">
+          <h2>Setup status</h2>
+          <p><strong>Google Analytics:</strong> <span data-analytics-status>Checking…</span></p>
+          <p><strong>Search Console:</strong> <span data-search-console-status>Checking…</span></p>
+          <p class="muted">Local click storage key: <code class="inline-code" data-storage-key>Checking…</code></p>
+        </aside>
+      </div>
+    </header>
+
+    <main class="layout landing-layout">
+      <section class="panel wide">
+        <div class="section-heading dashboard-heading">
+          <div>
+            <p class="eyebrow">Performance snapshot</p>
+            <h2>Affiliate click overview</h2>
+            <p class="muted">Clicks are stored in this browser for QA and sent to GA4 as <code class="inline-code">affiliate_click</code> events when a real Measurement ID is configured.</p>
+          </div>
+          <button type="button" data-clear-clicks>Clear local clicks</button>
+        </div>
+        <div class="dashboard-metrics">
+          <article class="metric-card">
+            <span>Total clicks</span>
+            <strong data-total-clicks>0</strong>
+          </article>
+          <article class="metric-card">
+            <span>Pages clicked</span>
+            <strong data-unique-pages>0</strong>
+          </article>
+          <article class="metric-card">
+            <span>Latest click</span>
+            <strong data-latest-click>No clicks yet</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Clicks by product</h2>
+        <div class="metric-list" data-product-clicks></div>
+      </section>
+
+      <section class="panel">
+        <h2>Clicks by page</h2>
+        <div class="metric-list" data-page-clicks></div>
+      </section>
+
+      <section class="panel wide">
+        <h2>Recent click events</h2>
+        <div class="table-wrap">
+          <table class="click-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Product / link</th>
+                <th>Page</th>
+                <th>Target</th>
+              </tr>
+            </thead>
+            <tbody data-event-rows>
+              <tr><td colspan="4">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>As an Amazon Associate, GADGETS MELA may earn from qualifying purchases.</p>
+      <a href="index.html">All landing pages</a>
+    </footer>
+    <script type="module" src="src/click-dashboard.js"></script>
+  </body>
+</html>

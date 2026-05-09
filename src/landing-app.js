@@ -1,8 +1,13 @@
+import { initGoogleAnalytics, registerClickTracking } from './analytics.js';
 import { SITE_NAME, getPageBySlug, seoPages } from './seo-pages.js';
 
 const pageSlug = document.body.dataset.page;
 const currentPage = pageSlug ? getPageBySlug(pageSlug) : null;
 const formatLinks = (page) => page.path;
+const dashboardLink = '<a href="click-dashboard.html">Click Tracking Dashboard</a>';
+
+initGoogleAnalytics();
+registerClickTracking();
 
 renderNavigation();
 
@@ -18,6 +23,7 @@ function renderNavigation() {
 
   nav.innerHTML = seoPages
     .map((page) => `<a href="${formatLinks(page)}"${page.slug === pageSlug ? ' aria-current="page"' : ''}>${page.heading}</a>`)
+    .concat(dashboardLink)
     .join('');
 }
 
@@ -54,6 +60,14 @@ function renderDirectory() {
         <a class="button-link" href="${page.path}">Open guide</a>
       </article>
     `)
+    .concat(`
+      <article class="directory-card">
+        <p class="eyebrow">Analytics</p>
+        <h2><a href="click-dashboard.html">Click Tracking Dashboard</a></h2>
+        <p>Review locally tracked Amazon affiliate clicks by product and page while GA4 records live affiliate_click events.</p>
+        <a class="button-link" href="click-dashboard.html">Open dashboard</a>
+      </article>
+    `)
     .join('');
 }
 
@@ -70,7 +84,7 @@ function renderProductCard(product) {
         <p>${product.description}</p>
         <p class="price">${product.priceLabel}</p>
         <div class="actions">
-          <a class="button-link primary" href="${product.affiliateUrl}" target="_blank" rel="nofollow sponsored noopener">View on Amazon</a>
+          <a class="button-link primary" href="${product.affiliateUrl}" target="_blank" rel="nofollow sponsored noopener" data-track-click="true" data-track-category="amazon-affiliate" data-track-label="${product.title}">View on Amazon</a>
         </div>
       </div>
     </article>
