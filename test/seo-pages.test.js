@@ -45,9 +45,22 @@ test('generated HTML files expose SEO metadata and FAQ schema', () => {
     assert.match(html, /FAQPage/);
     assert.match(html, /data-product-grid/);
     assert.match(html, /data-related-links/);
+    assert.match(html, /google-site-verification/);
+    assert.match(html, /Click Tracking Dashboard/);
   }
 });
 
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
+
+
+test('click dashboard page exposes analytics and tracking containers', () => {
+  const html = readFileSync('click-dashboard.html', 'utf8');
+
+  assert.match(html, /Click Tracking Dashboard \| GADGETS MELA/);
+  assert.match(html, /google-site-verification/);
+  assert.match(html, /data-total-clicks/);
+  assert.match(html, /data-product-clicks/);
+  assert.match(html, /src\/click-dashboard\.js/);
+});
