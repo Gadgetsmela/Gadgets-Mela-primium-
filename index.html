@@ -3,110 +3,71 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GADGETS MELA Product Import</title>
+    <title>GADGETS MELA SEO Landing Pages</title>
+    <meta name="description" content="Browse GADGETS MELA SEO landing pages for budget gadgets, earbuds, smart home products, mobile accessories, kitchen gadgets, and trending Amazon finds in India." />
     <link rel="stylesheet" href="src/styles.css" />
   </head>
   <body>
-    <header class="site-header">
+    <header class="site-header landing-hero">
+      <nav class="top-nav" aria-label="SEO landing pages" data-page-links><a href="best-gadgets-under-499.html">Best Gadgets Under ₹499</a><a href="best-gadgets-under-999.html">Best Gadgets Under ₹999</a><a href="best-earbuds-under-999.html">Best Earbuds Under ₹999</a><a href="best-smart-home-gadgets.html">Best Smart Home Gadgets</a><a href="best-mobile-accessories.html">Best Mobile Accessories</a><a href="best-kitchen-gadgets.html">Best Kitchen Gadgets</a><a href="trending-amazon-finds-india.html">Trending Amazon Finds India</a></nav>
       <div>
         <p class="eyebrow">GADGETS MELA</p>
-        <h1>Fallback product import</h1>
-        <p>Import ASINs safely when PA API is unavailable, then complete details before publishing.</p>
+        <h1>SEO landing pages for Amazon India gadget shoppers</h1>
+        <p>Choose a guide to browse curated product cards, affiliate shopping buttons, FAQs, and internal links.</p>
       </div>
     </header>
-
-    <main class="layout">
-      <section class="panel">
-        <h2>Import single ASIN</h2>
-        <form id="asin-import-form" class="stack">
-          <label>
-            Amazon ASIN
-            <input id="asin-input" name="asin" placeholder="B0FFBMBPF3" required />
-          </label>
-          <button type="submit">Create draft product</button>
-        </form>
-        <p class="notice">PA API unavailable. Please add title, image, and price manually before publishing.</p>
-      </section>
-
-      <section class="panel">
-        <h2>Bulk manual import</h2>
-        <p class="format">Use one product per line:</p>
-        <code>title | asin | amazonUrl | imageUrl | priceINR | mrpINR | category | badge</code>
-        <form id="bulk-import-form" class="stack">
-          <textarea id="bulk-input" rows="6" placeholder="Wireless Earbuds | B0EXAMPLE12 | https://www.amazon.in/dp/B0EXAMPLE12 | https://m.media-amazon.com/images/I/example.jpg | 1299 | 2999 | Audio | Deal"></textarea>
-          <button type="submit">Import draft products</button>
-        </form>
-      </section>
-
+    <main class="layout landing-layout">
       <section class="panel wide">
-        <div class="section-heading">
-          <div>
-            <h2>Draft products</h2>
-            <p>Drafts remain hidden from the storefront until every required field is complete.</p>
-          </div>
+        <h2>All guides</h2>
+        <div class="directory-grid" data-directory>
+          <article class="directory-card">
+            <p class="eyebrow">GADGETS MELA</p>
+            <h2><a href="best-gadgets-under-499.html">Best Gadgets Under ₹499</a></h2>
+            <p>Discover useful gadgets under ₹499 in India, including mobile stands, cable organisers, USB lights, and cleaning kits with Amazon affiliate picks.</p>
+            <a class="button-link" href="best-gadgets-under-499.html">Open guide</a>
+          </article>
+          <article class="directory-card">
+            <p class="eyebrow">GADGETS MELA</p>
+            <h2><a href="best-gadgets-under-999.html">Best Gadgets Under ₹999</a></h2>
+            <p>Shop smart gadgets under ₹999 in India across charging, audio, lighting, and everyday utility categories with curated Amazon affiliate links.</p>
+            <a class="button-link" href="best-gadgets-under-999.html">Open guide</a>
+          </article>
+          <article class="directory-card">
+            <p class="eyebrow">GADGETS MELA</p>
+            <h2><a href="best-earbuds-under-999.html">Best Earbuds Under ₹999</a></h2>
+            <p>Compare budget earbuds under ₹999 in India for calls, bass, compact cases, and casual gaming with quick Amazon shopping links.</p>
+            <a class="button-link" href="best-earbuds-under-999.html">Open guide</a>
+          </article>
+          <article class="directory-card">
+            <p class="eyebrow">GADGETS MELA</p>
+            <h2><a href="best-smart-home-gadgets.html">Best Smart Home Gadgets</a></h2>
+            <p>Explore smart home gadgets in India including smart plugs, Wi-Fi bulbs, sensor lights, and connected security picks for easy automation.</p>
+            <a class="button-link" href="best-smart-home-gadgets.html">Open guide</a>
+          </article>
+          <article class="directory-card">
+            <p class="eyebrow">GADGETS MELA</p>
+            <h2><a href="best-mobile-accessories.html">Best Mobile Accessories</a></h2>
+            <p>Find practical mobile accessories in India such as chargers, OTG adapters, tempered glass, and car holders curated by GADGETS MELA.</p>
+            <a class="button-link" href="best-mobile-accessories.html">Open guide</a>
+          </article>
+          <article class="directory-card">
+            <p class="eyebrow">GADGETS MELA</p>
+            <h2><a href="best-kitchen-gadgets.html">Best Kitchen Gadgets</a></h2>
+            <p>Upgrade daily cooking with useful kitchen gadgets in India including choppers, scales, oil dispensers, and rechargeable lighters.</p>
+            <a class="button-link" href="best-kitchen-gadgets.html">Open guide</a>
+          </article>
+          <article class="directory-card">
+            <p class="eyebrow">GADGETS MELA</p>
+            <h2><a href="trending-amazon-finds-india.html">Trending Amazon Finds India</a></h2>
+            <p>Browse trending Amazon finds in India, from desk cleaners and LED strips to travel utilities and viral everyday gadgets.</p>
+            <a class="button-link" href="trending-amazon-finds-india.html">Open guide</a>
+          </article>
         </div>
-        <div id="draft-list" class="card-grid"></div>
-      </section>
-
-      <section class="panel wide">
-        <h2>Storefront preview</h2>
-        <p>Only published products with a non-zero rupee price are shown here.</p>
-        <div id="storefront-list" class="card-grid"></div>
       </section>
     </main>
-
-    <template id="product-card-template">
-      <article class="product-card">
-        <div class="image-frame">
-          <img data-field="image" alt="" />
-          <span data-field="imagePlaceholder">No image yet</span>
-        </div>
-        <div class="card-body">
-          <span class="status" data-field="status"></span>
-          <h3 data-field="title"></h3>
-          <p data-field="asin"></p>
-          <p class="muted" data-field="message"></p>
-          <p class="price" data-field="price"></p>
-          <p class="muted" data-field="missing"></p>
-          <div class="actions">
-            <button type="button" data-action="edit">Edit product</button>
-            <button type="button" data-action="publish" class="primary">Publish</button>
-          </div>
-        </div>
-      </article>
-    </template>
-
-    <dialog id="edit-dialog">
-      <form id="edit-product-form" method="dialog" class="editor-form">
-        <header>
-          <h2>Edit product</h2>
-          <button type="button" id="close-editor" aria-label="Close editor">×</button>
-        </header>
-        <input type="hidden" id="edit-id" />
-        <div class="form-grid">
-          <label>Product title<input id="edit-title" required /></label>
-          <label>Amazon product URL<input id="edit-amazon-url" type="url" required /></label>
-          <label>Amazon image URL<input id="edit-image-url" type="url" /></label>
-          <label>Upload image<input id="edit-image-upload" type="file" accept="image/*" /></label>
-          <label>India price ₹<input id="edit-price" type="number" min="1" step="0.01" required /></label>
-          <label>India MRP ₹<input id="edit-mrp" type="number" min="1" step="0.01" required /></label>
-          <label>Category<input id="edit-category" required /></label>
-          <label>Badge<input id="edit-badge" /></label>
-          <label class="full">Short description<textarea id="edit-description" rows="3" required></textarea></label>
-        </div>
-        <div class="preview-row">
-          <div class="image-frame small">
-            <img id="image-preview" alt="Product image preview" />
-            <span id="image-preview-placeholder">Image preview</span>
-          </div>
-          <p class="muted">Publish appears on the draft card only after all required details are saved.</p>
-        </div>
-        <footer>
-          <button type="button" id="save-editor" class="primary">Save product</button>
-        </footer>
-      </form>
-    </dialog>
-
-    <script type="module" src="src/app.js"></script>
+    <footer class="site-footer">
+      <p>As an Amazon Associate, GADGETS MELA may earn from qualifying purchases.</p>
+    </footer>
+    <script type="module" src="src/landing-app.js"></script>
   </body>
 </html>
